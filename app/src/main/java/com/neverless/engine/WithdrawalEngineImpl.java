@@ -28,6 +28,10 @@ public class WithdrawalEngineImpl implements WithdrawalEngine {
 		this.withdrawalService = withdrawalService;
 	}
 
+	public void init() {
+
+	}
+
 	void control() {
 
 	}
