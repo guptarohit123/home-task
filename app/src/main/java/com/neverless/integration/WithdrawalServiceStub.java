@@ -16,7 +16,7 @@ public class WithdrawalServiceStub<BigDecimal> implements WithdrawalService<BigD
 	private final ConcurrentMap<WithdrawalId, Withdrawal<BigDecimal>> requests = new ConcurrentHashMap<>();
 
 	@Override
-	public void requestWithdrawal(WithdrawalId id, Address address, BigDecimal amount) { // Please substitute T with preferred type
+	public void requestWithdrawal(WithdrawalId id, Address address, BigDecimal amount) {
 		final var existing = requests.putIfAbsent(id, new Withdrawal<>(finalState(), finaliseAt(), address, amount));
 		if (existing != null && !Objects.equals(existing.address, address) && !Objects.equals(existing.amount, amount))
 			throw new IllegalStateException("Withdrawal request with id[%s] is already present".formatted(id));

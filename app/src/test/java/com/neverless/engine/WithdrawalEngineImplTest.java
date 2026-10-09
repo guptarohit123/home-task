@@ -1,15 +1,7 @@
 package com.neverless.engine;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoInteractions;
-import static org.mockito.Mockito.when;
-
-import java.math.BigDecimal;
-import java.util.UUID;
-
+import com.neverless.domain.*;
+import com.neverless.integration.WithdrawalService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -17,14 +9,11 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.neverless.domain.Account;
-import com.neverless.domain.AccountId;
-import com.neverless.domain.AccountImpl;
-import com.neverless.domain.AccountRepository;
-import com.neverless.domain.AccountRepositoryImpl;
-import com.neverless.domain.WithdrawalRequestStatus;
-import com.neverless.domain.WithdrawalResponse;
-import com.neverless.integration.WithdrawalService;
+import java.math.BigDecimal;
+import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
 class WithdrawalEngineImplTest {
 
@@ -46,6 +35,7 @@ class WithdrawalEngineImplTest {
 		Account testAccount = new AccountImpl(AccountId.of(TEST_ACC), BigDecimal.valueOf(100));
 		accountRepository.addAccount(testAccount);
 		_sut = new WithdrawalEngineImpl(accountRepository, withdrawalService);
+		_sut.init();
 	}
 
 	@Test
